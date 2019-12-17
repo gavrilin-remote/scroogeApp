@@ -43,33 +43,31 @@ class BudgetComponent extends PureComponent {
         const {totalBudget} = this.props;
         const {chosenDate, modal, monthBudget} = this.state;
         return (
-            <Container>
-                <Content padder>
-                    <Card>
-                        <CardItem>
-                            <Body>
-                                <H3>Total budget</H3>
-                                <Text>{totalBudget}</Text>
-                            </Body>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem>
-                            <Body>
-                                <H3>{`Budget for ${chosenDate.format('MMMM YYYY')}`}</H3>
-                                <Text>{monthBudget}</Text>
-                            </Body>
-                            <Right>
-                                <DatePicker
-                                    onDateChange={this.setDate}
-                                />
-                            </Right>
-                        </CardItem>
-                    </Card>
-                    <Button onPress={this.showMonthBudgetForm} bordered>
-                        <Text>Set month budget</Text>
-                    </Button>
-                </Content>
+            <Content padder>
+                <Card>
+                    <CardItem>
+                        <Body>
+                            <H3>Total budget</H3>
+                            <Text>{totalBudget}</Text>
+                        </Body>
+                    </CardItem>
+                </Card>
+                <Card>
+                    <CardItem>
+                        <Body>
+                            <H3>{`Budget for ${chosenDate.format('MMMM YYYY')}`}</H3>
+                            <Text>{monthBudget}</Text>
+                        </Body>
+                        <Right>
+                            <DatePicker
+                                onDateChange={this.setDate}
+                            />
+                        </Right>
+                    </CardItem>
+                </Card>
+                <Button onPress={this.showMonthBudgetForm} bordered>
+                    <Text>Set month budget</Text>
+                </Button>
                 <Modal ref={modal}>
                     <Content
                         contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
@@ -90,7 +88,7 @@ class BudgetComponent extends PureComponent {
                         </Form>
                     </Content>
                 </Modal>
-            </Container>
+            </Content>
         )
     }
 }
