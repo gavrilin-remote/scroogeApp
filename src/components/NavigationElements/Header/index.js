@@ -1,9 +1,9 @@
 import React from 'react';
 import {Header, Left, Button, Icon, Body, Right, Title} from 'native-base'
 
-const StackHeader = ({navigation, title, withBack}) => {
+const StackHeader = ({navigation, title, withBack, ...props}) => {
     return (
-        <Header>
+        <Header {...props}>
             <Left>
                 {
                     withBack

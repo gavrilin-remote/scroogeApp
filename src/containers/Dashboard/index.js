@@ -6,6 +6,7 @@ class DashboardContainer extends Component {
     static navigationOptions = ({ navigation }) => ({
         header: (
             <StackHeader
+                hasSegment
                 navigation={navigation}
                 title={'Dashboard'}
             />

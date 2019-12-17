@@ -1,8 +1,22 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
+import {Container, Content,} from 'native-base';
 
-class SettingsComponent extends Component {
+class SettingsComponent extends PureComponent {
+    constructor(props) {
+        super(props);
+
+    }
+
     render() {
-        return null
+
+        return (
+            <Container>
+                <Content padder>
+
+                </Content>
+
+            </Container>
+        )
     }
 }
 

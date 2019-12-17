@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import SettingsComponent from "../../components/Settings";
 import StackHeader from "../../components/NavigationElements/Header";
+import {connect} from 'react-redux'
 
-class SettingsContainer extends Component {
-    static navigationOptions = ({ navigation }) => ({
+class SettingsContainer extends PureComponent {
+    static navigationOptions = ({navigation}) => ({
         header: (
             <StackHeader
                 navigation={navigation}
@@ -14,9 +15,17 @@ class SettingsContainer extends Component {
 
     render() {
         return (
-            <SettingsComponent/>
+            <SettingsComponent
+
+            />
         );
     }
 }
 
-export default SettingsContainer
+const mapStateToProps =
+    () => ({
+
+    });
+
+
+export default connect(mapStateToProps, {})(SettingsContainer)
