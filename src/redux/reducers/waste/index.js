@@ -1,6 +1,7 @@
 import moment from 'moment'
-import _ from 'lodash';
+import {uuid} from "../../../helpers";
 import {ADD_WASTE, REMOVE_WASTE} from "./types";
+import _ from 'lodash'
 
 const initialState = {
     totalSpent: 0,
@@ -23,7 +24,7 @@ const waste = (state = initialState || {}, action) => {
             };
             return {
                 ...state,
-                wastes: [{...action.payload, id: _.uniqueId('waste')}, ...state.wastes],
+                wastes: [{...action.payload, id: uuid('waste')}, ...state.wastes],
                 monthsSpent,
                 totalSpent: calculateTotalSpent(monthsSpent)
             }

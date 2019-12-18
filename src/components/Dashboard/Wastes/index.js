@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
-import {Body, Card, CardItem, Content, H3, Right, Text, List, ListItem} from "native-base";
-import {TouchableOpacity, StyleSheet} from "react-native";
+import {Body, Card, CardItem, Content, H3, Right, Text, ListItem} from "native-base";
+import {TouchableOpacity, StyleSheet, FlatList} from "react-native";
 import DatePicker from "../../common/DatePicker";
 import moment from "moment";
 import Modal from "../../common/Modal";
@@ -45,6 +45,17 @@ class WasteComponent extends PureComponent {
         modal.current.setModalVisible(false);
     };
 
+    renderListItem = ({item}) => {
+        return (
+            <ListItem style={styles.listItem}>
+                <Text>{item.value}</Text>
+                <Text>{moment.utc(item.spentAt).format('HH:MM:SS d.M.YYYY')}</Text>
+            </ListItem>
+        )
+    };
+
+    renderListHeader =() =>(<Text style={{paddingLeft:10}}>Wastes history:</Text>)
+
     render() {
         const {totalSpent, wastes} = this.props;
         const {chosenDate, modal, monthSpent} = this.state;
@@ -77,17 +88,13 @@ class WasteComponent extends PureComponent {
                 >
                     <H3 style={{textTransform: 'uppercase'}}>Spent</H3>
                 </TouchableOpacity>
-                <List
+                <FlatList
+                    data={wastes}
                     style={{width: '100%', maxHeight: 600}}
-                >
-                    {wastes.map(data =>
-                        <ListItem key={data.id}
-                                  style={{minHeight: 40, flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text>{data.value} </Text>
-                            <Text>{moment.utc(data.spentAt).format('HH:MM:SS d.M.YYYY')}</Text>
-                        </ListItem>)
-                    }
-                </List>
+                    renderItem={this.renderListItem}
+                    ListHeaderComponent={this.renderListHeader}
+                    keyExtractor={item => item.id}
+                />
                 <Modal ref={modal}>
                     <WasteForm
                         onSubmit={this.onAddWaste}
@@ -113,5 +120,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    listItem: {
+        minHeight: 40, flexDirection: 'row', justifyContent: 'space-between'
     }
 })
