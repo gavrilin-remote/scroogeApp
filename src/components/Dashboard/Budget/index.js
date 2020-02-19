@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react';
 import {Container, Content, H3, Form, Item, Label, Input, Card, CardItem, Body, Text, Right, Button} from 'native-base';
+import {View} from 'react-native'
 import moment from 'moment'
 import DatePicker from '../../common/DatePicker'
 import Modal from '../../common/Modal'
+import CurrencyLabel from "../../common/Currency";
 
 class BudgetComponent extends PureComponent {
     constructor(props) {
@@ -10,19 +12,27 @@ class BudgetComponent extends PureComponent {
         this.state = {
             chosenDate: moment.utc(),
             modal: React.createRef(),
-            monthBudget: 0
+            monthBudget: 0,
+            monthSpent: 0
         };
     }
 
     componentDidMount() {
-        this.getMonthBudget()
+        this.getMonthBudget();
+        this.getMonthSpent();
     }
 
     getMonthBudget = () => this.setState(({chosenDate}) =>
         ({monthBudget: this.props.monthsBudget[chosenDate.format('YYYY.MM')] || 0}));
 
+    getMonthSpent = () => this.setState(({chosenDate}) =>
+        ({monthSpent: this.props.monthsSpent[chosenDate.format('YYYY.MM')] || 0}));
+
     setDate = (newDate) => {
-        this.setState({chosenDate: moment.utc(newDate)}, this.getMonthBudget);
+        this.setState({chosenDate: moment.utc(newDate)}, () => {
+            this.getMonthBudget();
+            this.getMonthSpent()
+        });
     };
 
     showMonthBudgetForm = () => {
@@ -40,15 +50,18 @@ class BudgetComponent extends PureComponent {
     };
 
     render() {
-        const {totalBudget} = this.props;
-        const {chosenDate, modal, monthBudget} = this.state;
+        const {totalBudget, totalSpent} = this.props;
+        const {chosenDate, modal, monthBudget, monthSpent} = this.state;
         return (
             <Content padder>
                 <Card>
                     <CardItem>
                         <Body>
                             <H3>Total budget</H3>
-                            <Text>{totalBudget}</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text>{totalBudget - totalSpent}<CurrencyLabel/></Text>
+                                <Text style={{color: 'red'}}>({totalSpent})<CurrencyLabel/></Text>
+                            </View>
                         </Body>
                     </CardItem>
                 </Card>
@@ -56,7 +69,10 @@ class BudgetComponent extends PureComponent {
                     <CardItem>
                         <Body>
                             <H3>{`Budget for ${chosenDate.format('MMMM YYYY')}`}</H3>
-                            <Text>{monthBudget}</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text>{monthBudget - monthSpent}<CurrencyLabel/></Text>
+                                <Text style={{color: 'red'}}>({monthSpent})<CurrencyLabel/></Text>
+                            </View>
                         </Body>
                         <Right>
                             <DatePicker

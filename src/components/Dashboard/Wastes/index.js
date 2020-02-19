@@ -5,6 +5,7 @@ import DatePicker from "../../common/DatePicker";
 import moment from "moment";
 import Modal from "../../common/Modal";
 import WasteForm from "./add";
+import CurrencyLabel from "../../common/Currency";
 
 class WasteComponent extends PureComponent {
     constructor(props) {
@@ -48,7 +49,7 @@ class WasteComponent extends PureComponent {
     renderListItem = ({item}) => {
         return (
             <ListItem style={styles.listItem}>
-                <Text>{item.value}</Text>
+                <Text>{item.value} <CurrencyLabel/></Text>
                 <Text>{moment.utc(item.spentAt).format('HH:MM:SS d.M.YYYY')}</Text>
             </ListItem>
         )
@@ -65,7 +66,7 @@ class WasteComponent extends PureComponent {
                     <CardItem>
                         <Body>
                             <H3>Total spent</H3>
-                            <Text>{totalSpent}</Text>
+                            <Text>{totalSpent} <CurrencyLabel/></Text>
                         </Body>
                     </CardItem>
                 </Card>
@@ -73,7 +74,7 @@ class WasteComponent extends PureComponent {
                     <CardItem>
                         <Body>
                             <H3>{`Spent for ${chosenDate.format('MMMM YYYY')}`}</H3>
-                            <Text>{monthSpent}</Text>
+                            <Text>{monthSpent} <CurrencyLabel/></Text>
                         </Body>
                         <Right>
                             <DatePicker

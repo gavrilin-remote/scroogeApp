@@ -6,12 +6,20 @@ import {setMonthBudget} from "../../../redux/reducers/actions/budget";
 class BudgetContainer extends PureComponent {
 
     render() {
-        const {setMonthBudget, totalBudget, monthsBudget} = this.props;
+        const {
+            setMonthBudget,
+            totalBudget,
+            monthsBudget,
+            totalSpent,
+            monthsSpent
+        } = this.props;
         return (
             <BudgetComponent
                 setMonthBudget={setMonthBudget}
                 totalBudget={totalBudget}
                 monthsBudget={monthsBudget}
+                totalSpent={totalSpent}
+                monthsSpent={monthsSpent}
             />
         );
     }
@@ -22,10 +30,16 @@ const mapStateToProps =
          budget: {
              totalBudget,
              monthsBudget
+         },
+         waste: {
+             totalSpent,
+             monthsSpent
          }
      }) => ({
         totalBudget,
-        monthsBudget
+        monthsBudget,
+        totalSpent,
+        monthsSpent
     });
 
 
