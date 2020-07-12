@@ -4,6 +4,17 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import AsyncStorage from "@react-native-community/async-storage";
 import {persistStore, persistReducer} from 'redux-persist'
+import firebase from '@react-native-firebase/app'
+import '@react-native-firebase/auth'
+import '@react-native-firebase/database'
+
+const fbConfig = {}
+
+const rrfConfig = {
+    userProfile: 'users'
+}
+
+firebase.initializeApp(fbConfig)
 
 const persistConfig = {
     key: 'root',
@@ -34,8 +45,15 @@ function configureStore(initialState: { [key: string]: any }) {
         _getMiddlewares()
     );
     const persistor = persistStore(store);
-    return {store, persistor}
+
+    const rrfProps = {
+        firebase,
+        config: rrfConfig,
+        dispatch: store.dispatch
+    }
+
+    return {store, persistor, rrfProps}
 }
 
-export const {store, persistor} = configureStore({})
+export const {store, persistor, rrfProps} = configureStore({})
 

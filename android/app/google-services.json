@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "587148359203",
+    "firebase_url": "https://scroogeapp-7bae8.firebaseio.com",
+    "project_id": "scroogeapp-7bae8",
+    "storage_bucket": "scroogeapp-7bae8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587148359203:android:e9d03026eae9ac570e2396",
+        "android_client_info": {
+          "package_name": "com.scroogeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587148359203-ek7ooj15u370bhd33j291pe5cn7s8ng3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYTGyqI77jrjFg2hbwzL398dB52ESoMEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587148359203-ek7ooj15u370bhd33j291pe5cn7s8ng3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
